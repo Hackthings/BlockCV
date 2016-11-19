@@ -12,6 +12,10 @@ import (
 type BlockCV struct{}
 
 func (bc *BlockCV) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+	fmt.Println(function)
+	for i := 0; i < len(args); i++ {
+		fmt.Println(args[i])
+	}
 	if function == "create-student" {
 		myStudent := new(Student)
 		myStudent.Name = "Dan"
