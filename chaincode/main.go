@@ -11,7 +11,7 @@ import (
 
 type BlockCV struct{}
 
-func (bc *BlockCV) Init(stub shim.ChaincodeStubInterface) ([]byte, error) {
+func (bc *BlockCV) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	/*for i := 0; i < len(args); i++ {
 		fmt.Println(args[i])
 	}
@@ -91,11 +91,16 @@ func (bc *BlockCV) Invoke(stub shim.ChaincodeStubInterface, function string, arg
 		//args[0] means the student key
 		//args[1] means the json of the new student
 		fmt.Println("creating student...")
-		if len(args) < 2 {
+		if len(args) < 3 {
 			return nil, errors.New("Missing arguments, expecting 2")
 		}
+		studentObj := new(Student)
+		studentObj.Name = args[1]
+		studentObj.DateOfBirth = args[2]
+		studentObj.AccessList = []string{}
+		studentObj.Qualifications = []*Qualification{}
 		studentKey := args[0]
-		err := stub.PutState(studentKey, []byte(args[1]))
+		err := stub.PutState(studentKey, []byte(fmt.Sprintf("%v", studentObj)))
 		if err != nil {
 			return nil, err
 		}
