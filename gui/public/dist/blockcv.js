@@ -1,10 +1,22 @@
 var app = angular.module("blockcv", ['ngRoute']);
+app.controller("EmployerCtrl", ['$scope', '$params', 'BlockCVSvc', function ($scope, $params, BlockCVSvc) {
+}]);
+
 app.controller("HomeCtrl", ['$scope', function ($scope) {
 
 }]);
 
-app.controller("StudentCtrl", ['$scope', function ($scope) {
+app.controller("StudentCtrl", ['$scope', '$params', 'BlockCVSvc', function ($scope, $params, BlockCVSvc) {
+    function load() {
+        var studentId = $params.id;
 
+        BlockCVSvc.getStudent(studentId)
+            .success(function (data) {
+                $scope.student = data.result.message;
+            });
+    }
+
+    load();
 }]);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
@@ -150,7 +162,6 @@ app.factory("BlockCVSvc", ['$http', function ($http) {
         "createStudent": createStudent,
         "grantAccess": grantAccess,
     };
-
 
     function b64EncodeUnicode(str) {
         return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
