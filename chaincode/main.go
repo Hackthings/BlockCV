@@ -16,6 +16,8 @@ func (bc *BlockCV) Init(stub shim.ChaincodeStubInterface, function string, args 
 }
 
 func (bc *BlockCV) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+	fmt.Fprintln("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+	fmt.Fprintln("The function is " + function)
 	// This returns a Student Object with the key
 	function = strings.ToLower(function)
 	switch function {
