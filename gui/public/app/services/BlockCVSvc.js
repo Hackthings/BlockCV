@@ -16,7 +16,7 @@ app.factory("BlockCVSvc", ['$http', function ($http) {
     }
 
     function createStudent(student) {
-        var key = b64EncodeUnicode(student.name);
+        var key = b64EncodeUnicode(student.name + student.dateofbirth);
         var requestArgs = {
             method: "invoke",
             function: "create-student",
