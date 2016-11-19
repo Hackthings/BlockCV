@@ -102,7 +102,7 @@ func (bc *BlockCV) Invoke(stub shim.ChaincodeStubInterface, function string, arg
 		studentObj.AccessList = []string{}
 		studentObj.Qualifications = []*Qualification{}
 		studentKey := args[0]
-		err := stub.PutState(studentKey, []byte(fmt.Sprintf("%v", studentObj)))
+		err := storeStudent(stub, studentKey, studentObj)
 		if err != nil {
 			return nil, err
 		}
