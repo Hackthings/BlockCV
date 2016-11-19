@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html ng-app="blockcv">
 <head>
-  <title>BlockCV</title>
-
+  <title>Public Uber</title>
+     
      <!--  jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
@@ -12,12 +12,17 @@
 <!-- Bootstrap Date-Picker Plugin -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+     
+     
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
   <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
   <link href="stylesheets/app.css" rel='stylesheet' type='text/css'>
 </head>
 <body>
-<nav class="navbar navbar-default">
+     <div class = "container">
+          
+ 
+<nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -35,9 +40,9 @@
             <ul class="nav navbar-nav">
                 <li><a href="#/home">Home</a></li>
                 <li><a href="#/uni">Uni</a></li>
-                <li><a href="#/student/sam">Student</a></li>
+                <li><a href="#/student">Student</a></li>
                 <li><a href="#/employer">Employer</a></li>
-                 <li><a href="#/add-qualification">addQualification</a></li>
+                 <li><a href="#/add-qualification">AddQualification</a></li>
                  
             </ul>
         </div><!-- /.navbar-collapse -->
@@ -46,11 +51,20 @@
 
   <div class="container">
     <div ng-view></div>
+      
+       
   </div>
+     
+   
+
+     
+     
+     
   <script src="lib/jquery/dist/jquery.min.js"></script>
   <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="lib/angular/angular.min.js"></script>
   <script src="lib/angular-route/angular-route.min.js"></script>
   <script src="dist/blockcv.min.js"></script>
+              </div>
 </body>
 </html>
