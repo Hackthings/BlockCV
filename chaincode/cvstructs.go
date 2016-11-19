@@ -13,5 +13,12 @@ type Student struct {
 	ID             int
 	Name           string
 	DateOfBirth    string
-	Qualifications []Qualification
+	Qualifications []*Qualification
+	AccessList     []string
+}
+
+//Represents the employer object
+type Employer struct {
+	ID   int
+	Name string
 }
