@@ -1,0 +1,33 @@
+.panel-heading .heading {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.key-value .key {
+  font-weight: bold;
+  padding: 3px;
+}
+.key-value .value {
+  padding: 5px;
+  background-color: #ececec;
+  margin-left: 10px;
+  min-height: 2em;
+  padding-left: 10px;
+  border-radius: 5px;
+  font-size: 130%;
+}
+.numeric {
+  text-align: right;
+}
+#page-home .panel-body {
+  text-align: center;
+}
+#page-home img {
+  width: 230px;
+}
+.header img {
+  height: 40px;
+}
+.breadcrumb img {
+  height: 30px;
+  margin-right: 5px;
+}

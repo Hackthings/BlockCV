@@ -1,0 +1,24 @@
+{
+  "name": "template",
+  "homepage": "https://github.com/stanacton/hackathon",
+  "authors": [
+    "stanacton <stanacton@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MINE",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-route": "^1.5.8",
+    "bootstrap": "^3.3.7",
+    "web3": "^0.16.0"
+  }
+}
