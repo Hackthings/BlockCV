@@ -20,6 +20,14 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
             templateUrl: 'app/partials/employer-results.html',
             controller: 'EmployerCtrl'
         })
+    
+      .when('/add-qualification', {
+            templateUrl: 'app/partials/addqualification.html',
+            controller: 'HomeCtrl'
+        })
+    
+    
+    
         .otherwise({
             redirectTo: '/home'
         });
