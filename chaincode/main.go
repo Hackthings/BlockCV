@@ -87,21 +87,22 @@ func storeStudent(stub shim.ChaincodeStubInterface, key string, student *Student
 
 func (bc *BlockCV) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	function = strings.ToLower(function)
+	function = args[0]
 	switch function {
 	case "create-student":
 		//args[0] means the student key
 		//args[1] means the json of the new student
 		fmt.Println("creating student...")
-		if len(args) < 3 {
-			return nil, errors.New("Missing arguments, expecting 2")
+		if len(args) < 4 {
+			return nil, errors.New("Missing arguments, expecting 4")
 		}
 
 		studentObj := new(Student)
-		studentObj.Name = args[1]
-		studentObj.DateOfBirth = args[2]
+		studentObj.Name = args[2]
+		studentObj.DateOfBirth = args[3]
 		studentObj.AccessList = []string{}
 		studentObj.Qualifications = []*Qualification{}
-		studentKey := args[0]
+		studentKey := args[1]
 		err := storeStudent(stub, studentKey, studentObj)
 		if err != nil {
 			return nil, err
