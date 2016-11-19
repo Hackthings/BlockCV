@@ -1,22 +1,99 @@
 var app = angular.module("blockcv", ['ngRoute']);
-app.controller("EmployerCtrl", ['$scope', '$params', 'BlockCVSvc', function ($scope, $params, BlockCVSvc) {
+app.controller("EmployerCtrl", ['$scope', 'BlockCVSvc', function ($scope, BlockCVSvc) {
+    $scope.search = function search(id) {
+        var args = {
+            studentId: id,
+            employerName: "Global INC"
+        };
+
+        BlockCVSvc.getStudentEmployer(args)
+            .success(function (data) {
+                $scope.student = data.result.message;
+            })
+            .error(function (err) {
+                console.error(err);
+                alert(err);
+            });
+    };
 }]);
 
 app.controller("HomeCtrl", ['$scope', function ($scope) {
 
 }]);
 
-app.controller("StudentCtrl", ['$scope', '$params', 'BlockCVSvc', function ($scope, $params, BlockCVSvc) {
+app.controller("StudentCtrl", ['$scope', '$routeParams', 'BlockCVSvc', function ($scope, $params, BlockCVSvc) {
+    $scope.studentId = $params.id;
     function load() {
-        var studentId = $params.id;
-
-        BlockCVSvc.getStudent(studentId)
+        BlockCVSvc.getStudent($scope.studentId)
             .success(function (data) {
+                if (!data.result || !data.result.message) {
+                    alert("There was a problem.  Check the console for the data");
+                    console.log(data);
+                    return;
+                }
                 $scope.student = data.result.message;
+            })
+            .error(function (data) {
+                console.error(data);
+                alert(data);
             });
     }
 
     load();
+
+    $scope.grantAccess = function (employerName) {
+        var args = {
+            employerName: employerName,
+            studentId: $scope.studentId,
+        };
+
+        BlockCVSvc.grantAccess(args)
+            .success(function (data) {
+                console.log(data);
+                load();
+            })
+            .error(function (data) {
+                console.error(data);
+                alert(data);
+            });
+    };
+}]);
+
+app.controller("UniCtrl", ['$scope', '$routeParams', 'BlockCVSvc', function ($scope, $params, BlockCVSvc) {
+
+
+    $scope.search = function search(id) {
+        var args = {
+            studentId: id,
+        };
+
+        $scope.studentId = id;
+
+        BlockCVSvc.getStudent(args)
+            .success(function (data) {
+                $scope.student = data.result.message;
+            })
+            .error(function (err) {
+                console.error(err);
+                alert(err);
+            });
+    };
+
+    $scope.addQualification = function (qual) {
+        var args = {
+            studentId: $scope.studentId,
+            qualification: qual
+        };
+
+        BlockCVSvc.addQualification(args)
+            .success(function (data) {
+                window.location.href = "#/uni";
+            })
+            .error(function (err) {
+                console.error(err);
+                alert(err);
+            });
+    };
 }]);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
@@ -27,20 +104,28 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         })
         .when('/uni', {
             templateUrl: 'app/partials/uni.html',
-            controller: 'HomeCtrl'
+            controller: 'UniCtrl'
         })
-        .when('/student', {
+        .when('/student/:id', {
             templateUrl: 'app/partials/student.html',
-            controller: 'HomeCtrl'
+            controller: 'StudentCtrl'
         })
         .when('/employer', {
             templateUrl: 'app/partials/employer.html',
-            controller: 'HomeCtrl'
+            controller: 'EmployerCtrl'
         })
         .when('/employer-results', {
             templateUrl: 'app/partials/employer-results.html',
+            controller: 'EmployerCtrl'
+        })
+    
+      .when('/add-qualification', {
+            templateUrl: 'app/partials/addqualification.html',
             controller: 'HomeCtrl'
         })
+    
+    
+    
         .otherwise({
             redirectTo: '/home'
         });
@@ -48,70 +133,75 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
    // $locationProvider.html5Mode(true);
 }]);
 app.factory("BlockCVSvc", ['$http', function ($http) {
+    var self = this;
+    self.config = {};
 
-    var nodeAddress = "addr:7050/chaincode";
-    var chaincodeAddress = "234234234234234234234234234";
+    $http.get("config.json")
+        .success(function (config) {
+            self.config = config || {};
+            console.log(self.config);
+        });
 
-    function grantAccess(args) {
+    self.grantAccess = function(args) {
         var requestArgs = {
             method: "invoke",
             function: "grant-access",
             args: [args.studentId, args.employerName],
-            name: chaincodeAddress
+            name: self.config.blockCVChaincodeAddress,
         };
         var request = generateRequest(requestArgs);
 
-        return $http.post(nodeAddress, request);
-    }
+        return $http.post(self.config.peerRestAddress, request);
+    };
 
-    function createStudent(student) {
-        var key = b64EncodeUnicode(student.name);
+    self.createStudent = function(student) {
+        var key = b64EncodeUnicode(student.name + student.dateofbirth);
         var requestArgs = {
             method: "invoke",
             function: "create-student",
             args: [key, student],
-            name: chaincodeAddress
+            name: self.config.blockCVChaincodeAddress
         };
         var request = generateRequest(requestArgs);
 
-        return $http.post(nodeAddress, request);
-    }
+        return $http.post(self.config.peerRestAddress, request);
+    };
 
-    function getStudent(studentId) {
+    self.getStudent = function (studentId) {
         var requestArgs = {
             method: "query",
             function: "student-get",
             args: [studentId],
-            name: chaincodeAddress
+            name: self.config.blockCVChaincodeAddress
         };
         var request = generateRequest(requestArgs);
 
-        return $http.post(nodeAddress, request);
-    }
+        return $http.post(self.config.peerRestAddress, request);
+    };
 
-    function getStudentEmployer(args) {
+    self.getStudentEmployer = function(args) {
         var requestArgs = {
             method: "query",
             function: "employer-get",
             args: [args.studentId, args.employerName],
-            name: chaincodeAddress
+            name: self.config.blockCVChaincodeAddress
         };
         var request = generateRequest(requestArgs);
 
-        return $http.post(nodeAddress, request);
-    }
+        return $http.post(self.config.peerRestAddress, request);
+    };
 
-    function addQualification(args) {
+    self.addQualification = function(args) {
         var requestArgs = {
             method: "invoke",
             function: "add-qualification",
             args: [args.studentId, args.qualification],
-            name: chaincodeAddress
+            name: self.config.blockCVChaincodeAddress
         };
         var request = generateRequest(requestArgs);
 
-        return $http.post(nodeAddress, request);
-    }
+        return $http.post(self.config.peerRestAddress, request);
+    };
 
     function generateRequest(args) {
         if (!args.method) {
@@ -155,13 +245,7 @@ app.factory("BlockCVSvc", ['$http', function ($http) {
         return request;
     }
 
-    return  {
-        "getStudentEmployer": getStudentEmployer,
-        "getStudent": getStudent,
-        "addQualification": addQualification,
-        "createStudent": createStudent,
-        "grantAccess": grantAccess,
-    };
+    return  self;
 
     function b64EncodeUnicode(str) {
         return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
