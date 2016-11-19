@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strings"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
@@ -16,11 +17,20 @@ func (bc *BlockCV) Init(stub shim.ChaincodeStubInterface, function string, args 
 
 func (bc *BlockCV) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	// This returns a Student Object with the key
-
+	function = strings.ToLower(function)
 	switch function {
 	case "student-get":
+		//args [0] means the student key
+		if len(args) < 1 {
+			return nil, errors.New("Missing arguments, expecting at least 1")
+		}
 		return stub.GetState(args[0])
 	case "employer-get":
+		//args[0] means the student key
+		//args[1] means the name of the employer
+		if len(args) < 2 {
+			return nil, errors.New("Missing arguments, expecting 2")
+		}
 		student, err := getStudent(stub, args[0])
 		if err != nil {
 			return nil, err
@@ -63,8 +73,14 @@ func storeStudent(stub shim.ChaincodeStubInterface, key string, student *Student
 }
 
 func (bc *BlockCV) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+	function = strings.ToLower(function)
 	switch function {
 	case "create-student":
+		//args[0] means the student key
+		//args[1] means the json of the new student
+		if len(args) < 2 {
+			return nil, errors.New("Missing arguments, expecting 2")
+		}
 		studentKey := args[0]
 		err := stub.PutState(studentKey, []byte(args[1]))
 		if err != nil {
@@ -72,6 +88,12 @@ func (bc *BlockCV) Invoke(stub shim.ChaincodeStubInterface, function string, arg
 		}
 		break
 	case "add-qualification":
+		//args[0] means student key
+		//args[1] means json of the new qualification
+		if len(args) < 2 {
+			return nil, errors.New("Missing arguments, expecting 2")
+		}
+
 		student, err := getStudent(stub, args[0])
 		if err != nil {
 			return nil, err
@@ -91,6 +113,11 @@ func (bc *BlockCV) Invoke(stub shim.ChaincodeStubInterface, function string, arg
 		}
 		break
 	case "grant-access":
+		//args[0] means the student key
+		//args[1] means the name of the employer to add to our current collection of granted employers
+		if len(args) < 2 {
+			return nil, errors.New("Missing arguments, expecting 2")
+		}
 		student, err := getStudent(stub, args[0])
 		if err != nil {
 			return nil, err
