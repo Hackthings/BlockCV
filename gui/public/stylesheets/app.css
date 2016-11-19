@@ -158,12 +158,7 @@ label {
   }
 }
 
-.btn {
-    height: 40px;
-    padding: 10px 16px;
-    border-radius: 3px;
-  min-width: 80px;
-}
+
 
 .btn-group.radio-group {
   .btn {
@@ -214,3 +209,37 @@ label { cursor: pointer; }
 :-ms-input-placeholder { color:#ccc; }
 ::-moz-placeholder { color:#ccc; }
 ::-webkit-input-placeholder { color:#ccc; }
+
+
+
+
+
+.lead {
+	font-family: 'Raleway', sans-serif;
+}
+
+.display-3 {
+	font-family: 'Raleway', sans-serif;
+	font-weight: bold;
+}
+
+.display-1 {
+font-family: 'Poppins', sans-serif;
+	font-weight: bold;
+}
+
+.control-label {
+	font-family: 'Raleway', sans-serif;
+	font-weight: 300;
+}
+
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+
