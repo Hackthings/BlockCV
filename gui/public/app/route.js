@@ -6,19 +6,19 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         })
         .when('/uni', {
             templateUrl: 'app/partials/uni.html',
-            controller: 'HomeCtrl'
+            controller: 'UniCtrl'
         })
-        .when('/student', {
+        .when('/student/:id', {
             templateUrl: 'app/partials/student.html',
-            controller: 'HomeCtrl'
+            controller: 'StudentCtrl'
         })
         .when('/employer', {
             templateUrl: 'app/partials/employer.html',
-            controller: 'HomeCtrl'
+            controller: 'EmployerCtrl'
         })
         .when('/employer-results', {
             templateUrl: 'app/partials/employer-results.html',
-            controller: 'HomeCtrl'
+            controller: 'EmployerCtrl'
         })
         .otherwise({
             redirectTo: '/home'

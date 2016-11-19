@@ -1,0 +1,4 @@
+{
+  "peerRestAddress": "http://localhost:7050/chaincode",
+  "blockCVChaincodeAddress": "asdfasdfasdfasdfasdfasdfasdf"
+}

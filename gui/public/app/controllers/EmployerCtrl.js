@@ -1,4 +1,4 @@
-app.controller("EmployerCtrl", ['$scope', '$params', 'BlockCVSvc', function ($scope, $params, BlockCVSvc) {
+app.controller("EmployerCtrl", ['$scope', 'BlockCVSvc', function ($scope, BlockCVSvc) {
     $scope.search = function search(id) {
         var args = {
             studentId: id,
@@ -9,6 +9,9 @@ app.controller("EmployerCtrl", ['$scope', '$params', 'BlockCVSvc', function ($sc
             .success(function (data) {
                 $scope.student = data.result.message;
             })
+            .error(function (err) {
+                console.error(err);
+                alert(err);
+            });
     };
-
 }]);
