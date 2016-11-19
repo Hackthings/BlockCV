@@ -19,7 +19,7 @@ func (bc *BlockCV) Init(stub shim.ChaincodeStubInterface, function string, args 
 	myStudent.Qualifications = []*Qualification{}
 	storeStudent(stub, "1", myStudent)
 	fmt.Print(getStudent(stub, "1"))
-	return nil, nil
+	return ([]byte(myStudent.Name)), nil
 }
 
 func (bc *BlockCV) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
