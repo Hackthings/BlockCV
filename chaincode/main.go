@@ -35,6 +35,7 @@ func (bc *BlockCV) Query(stub shim.ChaincodeStubInterface, function string, args
 		if len(args) < 1 {
 			return nil, errors.New("Missing arguments, expecting at least 1")
 		}
+		fmt.Println(stub.GetState(args[0]))
 		return stub.GetState(args[0])
 	case "employer-get":
 		//args[0] means the student key
@@ -89,6 +90,7 @@ func (bc *BlockCV) Invoke(stub shim.ChaincodeStubInterface, function string, arg
 	case "create-student":
 		//args[0] means the student key
 		//args[1] means the json of the new student
+		fmt.Println("creating student...")
 		if len(args) < 2 {
 			return nil, errors.New("Missing arguments, expecting 2")
 		}
