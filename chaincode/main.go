@@ -27,6 +27,7 @@ func (bc *BlockCV) Init(stub shim.ChaincodeStubInterface, function string, args 
 }
 
 func (bc *BlockCV) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+	fmt.Println("query is running " + function)
 	// This returns a Student Object with the key
 	function = strings.ToLower(function)
 	switch function {
@@ -94,6 +95,7 @@ func (bc *BlockCV) Invoke(stub shim.ChaincodeStubInterface, function string, arg
 		if len(args) < 3 {
 			return nil, errors.New("Missing arguments, expecting 2")
 		}
+
 		studentObj := new(Student)
 		studentObj.Name = args[1]
 		studentObj.DateOfBirth = args[2]
