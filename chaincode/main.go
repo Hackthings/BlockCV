@@ -12,21 +12,12 @@ import (
 type BlockCV struct{}
 
 func (bc *BlockCV) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
-	/*for i := 0; i < len(args); i++ {
-		fmt.Println(args[i])
-	}
-	myStudent := new(Student)
-	myStudent.Name = "Dan"
-	myStudent.DateOfBirth = "2000/01/01"
-	myStudent.AccessList = []string{}
-	myStudent.Qualifications = []*Qualification{}
-	storeStudent(stub, "1", myStudent)
-	fmt.Print(getStudent(stub, "1"))
-	return ([]byte(myStudent.Name)), nil*/
 	return nil, nil
 }
 
 func (bc *BlockCV) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+	fmt.Fprintln("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+	fmt.Fprintln("The function is " + function)
 	// This returns a Student Object with the key
 	function = strings.ToLower(function)
 	switch function {
@@ -35,7 +26,6 @@ func (bc *BlockCV) Query(stub shim.ChaincodeStubInterface, function string, args
 		if len(args) < 1 {
 			return nil, errors.New("Missing arguments, expecting at least 1")
 		}
-		fmt.Println(stub.GetState(args[0]))
 		return stub.GetState(args[0])
 	case "employer-get":
 		//args[0] means the student key
@@ -90,17 +80,11 @@ func (bc *BlockCV) Invoke(stub shim.ChaincodeStubInterface, function string, arg
 	case "create-student":
 		//args[0] means the student key
 		//args[1] means the json of the new student
-		fmt.Println("creating student...")
-		if len(args) < 3 {
+		if len(args) < 2 {
 			return nil, errors.New("Missing arguments, expecting 2")
 		}
-		studentObj := new(Student)
-		studentObj.Name = args[1]
-		studentObj.DateOfBirth = args[2]
-		studentObj.AccessList = []string{}
-		studentObj.Qualifications = []*Qualification{}
 		studentKey := args[0]
-		err := stub.PutState(studentKey, []byte(fmt.Sprintf("%v", studentObj)))
+		err := stub.PutState(studentKey, []byte(args[1]))
 		if err != nil {
 			return nil, err
 		}
