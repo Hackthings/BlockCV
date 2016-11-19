@@ -12,14 +12,17 @@ import (
 type BlockCV struct{}
 
 func (bc *BlockCV) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
-	myStudent := new(Student)
-	myStudent.Name = "Dan"
-	myStudent.DateOfBirth = "2000/01/01"
-	myStudent.AccessList = []string{}
-	myStudent.Qualifications = []*Qualification{}
-	storeStudent(stub, "1", myStudent)
-	fmt.Print(getStudent(stub, "1"))
-	return ([]byte(myStudent.Name)), nil
+	if function == "create-student" {
+		myStudent := new(Student)
+		myStudent.Name = "Dan"
+		myStudent.DateOfBirth = "2000/01/01"
+		myStudent.AccessList = []string{}
+		myStudent.Qualifications = []*Qualification{}
+		storeStudent(stub, "1", myStudent)
+		fmt.Print(getStudent(stub, "1"))
+		return ([]byte(myStudent.Name)), nil
+	}
+	return nil, nil
 }
 
 func (bc *BlockCV) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
