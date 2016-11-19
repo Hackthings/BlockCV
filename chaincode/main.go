@@ -11,8 +11,8 @@ import (
 
 type BlockCV struct{}
 
-func (bc *BlockCV) Init(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
-	for i := 0; i < len(args); i++ {
+func (bc *BlockCV) Init(stub shim.ChaincodeStubInterface) ([]byte, error) {
+	/*for i := 0; i < len(args); i++ {
 		fmt.Println(args[i])
 	}
 	myStudent := new(Student)
@@ -22,7 +22,7 @@ func (bc *BlockCV) Init(stub shim.ChaincodeStubInterface, args []string) ([]byte
 	myStudent.Qualifications = []*Qualification{}
 	storeStudent(stub, "1", myStudent)
 	fmt.Print(getStudent(stub, "1"))
-	return ([]byte(myStudent.Name)), nil
+	return ([]byte(myStudent.Name)), nil*/
 	return nil, nil
 }
 
