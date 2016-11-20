@@ -286,5 +286,8 @@ font-family: 'Poppins', sans-serif;
     text-transform: uppercase;
     font-family: "Raleway",sans-serif;
 }
-
+.jumbotron
+{
+background-color:#222D36;
+}
 
