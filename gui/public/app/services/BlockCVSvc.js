@@ -89,7 +89,8 @@ app.factory("BlockCVSvc", ['$http', function ($http) {
                 },
                 "ctorMsg": {
                     "args":[]
-                }
+                },
+                "secureContext": "test_user0"
             },
             "id": 1
         };
