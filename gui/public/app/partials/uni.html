@@ -10,7 +10,10 @@
      </div>
      
      <h2>Bedfordshire Uni</h2>
+    <div class="alert alert-success" ng-show="success===true">
+        You have created a student!!!  ID is <strong><a href="#/student/{{key}}"> {{ key }}</a></strong>
 
+    </div>
     <form method="post">
           <div class="form-group">
                <label class="control-label" for="studentName">Enter Student Name </label>

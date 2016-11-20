@@ -8,7 +8,8 @@ app.controller("StudentCtrl", ['$scope', '$routeParams', 'BlockCVSvc', function 
                     console.log(data);
                     return;
                 }
-                $scope.student = data.result.message;
+                console.log(data);
+                $scope.student = JSON.parse(data.result.message);
             })
             .error(function (data) {
                 console.error(data);

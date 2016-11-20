@@ -35,10 +35,12 @@ app.controller("UniCtrl", ['$scope', '$routeParams', 'BlockCVSvc', function ($sc
     };
 
     $scope.addStudent = function (student) {
+        $scope.success = false;
         BlockCVSvc.createStudent(student)
             .success(function (data) {
                 console.log('RESPONSE', JSON.stringify(data));
                 $scope.success = true;
+                $scope.key = BlockCVSvc.lastKey || "No Key";
             })
             .error(function (error) {
                 alert(JSON.stringify(error));

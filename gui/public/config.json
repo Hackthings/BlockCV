@@ -1,4 +1,4 @@
 {
   "peerRestAddress": "http://localhost:7050/chaincode",
-  "blockCVChaincodeAddress": "32cf4e3727a265a75c5aba2f953199893518cbcf0ce65f488e777a86486336e06ebb661dde34c5e985c3acb82fb896b0c23a59e32b0434825a0f5d8f03d45b8d"
+  "blockCVChaincodeAddress": "d12fcfdeaaacefa95887360eb6cda365675bb5d702d6633d245b428e3202727f237ac1e9a30e3e8ce846ec5f4d2aabd18a1070e884ff4054ca3044ce3ab705ec"
 }

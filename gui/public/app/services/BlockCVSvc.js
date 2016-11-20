@@ -7,30 +7,33 @@ app.factory("BlockCVSvc", ['$http', function ($http) {
             self.config = config || {};
             console.log(self.config);
         });
+    var address = "http://localhost:7050/chaincode";
+    var ccaddress = "d12fcfdeaaacefa95887360eb6cda365675bb5d702d6633d245b428e3202727f237ac1e9a30e3e8ce846ec5f4d2aabd18a1070e884ff4054ca3044ce3ab705ec";
 
     self.grantAccess = function(args) {
         var requestArgs = {
             method: "invoke",
             function: "grant-access",
             args: [args.studentId, args.employerName],
-            name: self.config.blockCVChaincodeAddress,
+            name: ccaddress,
         };
         var request = generateRequest(requestArgs);
 
-        return $http.post(self.config.peerRestAddress, request);
+        return $http.post(address, request);
     };
 
     self.createStudent = function(student) {
         var key = b64EncodeUnicode(student.name + student.dateofbirth);
+        self.lastKey = key;
         var requestArgs = {
             method: "invoke",
             function: "create-student",
             args: [key, JSON.stringify(student)],
-            name: self.config.blockCVChaincodeAddress
+            name: ccaddress
         };
         var request = generateRequest(requestArgs);
 
-        return $http.post(self.config.peerRestAddress, request);
+        return $http.post(address, request);
     };
 
     self.getStudent = function (studentId) {
@@ -38,11 +41,11 @@ app.factory("BlockCVSvc", ['$http', function ($http) {
             method: "query",
             function: "student-get",
             args: [studentId],
-            name: self.config.blockCVChaincodeAddress
+            name: ccaddress
         };
         var request = generateRequest(requestArgs);
-
-        return $http.post(self.config.peerRestAddress, request);
+        console.log(address);
+        return $http.post(address, request);
     };
 
     self.getStudentEmployer = function(args) {
@@ -50,11 +53,11 @@ app.factory("BlockCVSvc", ['$http', function ($http) {
             method: "query",
             function: "employer-get",
             args: [args.studentId, args.employerName],
-            name: self.config.blockCVChaincodeAddress
+            name: ccaddress
         };
         var request = generateRequest(requestArgs);
 
-        return $http.post(self.config.peerRestAddress, request);
+        return $http.post(address, request);
     };
 
     self.addQualification = function(args) {
@@ -62,11 +65,11 @@ app.factory("BlockCVSvc", ['$http', function ($http) {
             method: "invoke",
             function: "add-qualification",
             args: [args.studentId, args.qualification],
-            name: self.config.blockCVChaincodeAddress
+            name: ccaddress
         };
         var request = generateRequest(requestArgs);
 
-        return $http.post(self.config.peerRestAddress, request);
+        return $http.post(address, request);
     };
 
     function generateRequest(args) {
@@ -82,9 +85,10 @@ app.factory("BlockCVSvc", ['$http', function ($http) {
             "params": {
                 "type": 1,
                 "chaincodeID":{
+
                 },
                 "ctorMsg": {
-                    "args":["init", "a", "1000", "b", "2000"]
+                    "args":[]
                 }
             },
             "id": 1
@@ -100,18 +104,13 @@ app.factory("BlockCVSvc", ['$http', function ($http) {
 
         request.params.ctorMsg.args = args.args || [];
 
-
-
         if (args.function) {
             //request.params.ctorMsg.args.unshift(args.function || 'dummy');
             request.params.ctorMsg.function = args.function;
         }
 
         var date = new Date();
-
         request.id = date.getTime();
-
-
         console.log(JSON.stringify(request, null, 4));
 
         return request;

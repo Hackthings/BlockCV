@@ -16,9 +16,6 @@ func (bc *BlockCV) Init(stub shim.ChaincodeStubInterface, function string, args 
 
 func (bc *BlockCV) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	// This returns a Student Object with the key
-
-	return rangeQ(stub)
-
 	switch function {
 	case "student-get":
 		return stub.GetState(args[0])
@@ -65,7 +62,7 @@ func storeStudent(stub shim.ChaincodeStubInterface, key string, student *Student
 }
 
 func (bc *BlockCV) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
-	/*jsonKeys, err := json.Marshal(args)
+	jsonKeys, err := json.Marshal(args)
 	if err != nil {
 		return nil, fmt.Errorf("keys operation failed. Error marshaling JSON: %s", err)
 	}
@@ -73,7 +70,7 @@ func (bc *BlockCV) Invoke(stub shim.ChaincodeStubInterface, function string, arg
 	if err != nil {
 		return nil, err
 	}
-	*/
+
 	switch function {
 	case "create-student":
 		studentKey := args[0]
@@ -81,7 +78,8 @@ func (bc *BlockCV) Invoke(stub shim.ChaincodeStubInterface, function string, arg
 		if err != nil {
 			return nil, err
 		}
-		break
+		return []byte("SUCCESS!!!"), nil
+
 	case "add-qualification":
 		student, err := getStudent(stub, args[0])
 		if err != nil {
@@ -100,7 +98,7 @@ func (bc *BlockCV) Invoke(stub shim.ChaincodeStubInterface, function string, arg
 		if err != nil {
 			return nil, err
 		}
-		break
+		return []byte("SUCCESS!!!"), nil
 	case "grant-access":
 		student, err := getStudent(stub, args[0])
 		if err != nil {
@@ -111,6 +109,7 @@ func (bc *BlockCV) Invoke(stub shim.ChaincodeStubInterface, function string, arg
 		if err != nil {
 			return nil, err
 		}
+		return []byte("SUCCESS!!!"), nil
 	}
 
 	return nil, errors.New("Function was not understood")

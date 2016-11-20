@@ -1,22 +1,32 @@
 <div id="page-student">
-     <h4>Student - Sam</h4>
+     <h2>Student - {{ student.name }}</h2>
 
+     <h3>Qualifications</h3>
      <table class="table">
           <thead class="thead-inverse">
                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Course</th>
+                    <th>Institution</th>
+                    <th>Course Name</th>
+                    <th>Year</th>
+                    <th>Grade</th>
                </tr>
           </thead>
           <tbody>
-               <tr>
-                    <td>Sam Senda</td>
-                    <td>Computer Science</td>
-                    <td>1 Class (Hons)</td>
+               <tr ng-repeat="item in student.qualifications">
+                    <td>{{ item.institution }}</td>
+                    <td>{{ item.course }}</td>
+                    <td>{{ item.year }}</td>
+                    <td>{{ item.grade }}</td>
                </tr>
           </tbody>
      </table>
+
+
+     <h3>Grant Access to Employer</h3>
+     <div class="form-group">
+          <label for="employer">Employer</label>
+          <input class="form-control" type="text" id="employer" ng-model="item.employer" placeholder="Employer Name"/>
+     </div>
 
      <button type="button" class="btn btn-primary btn-lg  btn-outline-primary btn-block .btn-primarymine ">GRANT ACCESS</button>
 
