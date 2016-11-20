@@ -51,11 +51,10 @@
 
 
 .footer {
-  position: absolute;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 60px;
+  height: 200px;
   background-color: #f5f5f5;
 }
 
@@ -80,7 +79,7 @@
 }
 
 .navbar .navbar-collapse {
-    text-align: center;
+    text-align: right;
 }
 
 
@@ -242,4 +241,4 @@ font-family: 'Poppins', sans-serif;
   margin-top: 28px;
 }
 
-
+.logo-nav img{width:400px;max-width:100%}
