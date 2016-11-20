@@ -23,6 +23,10 @@
 
 
      <h3>Grant Access to Employer</h3>
+     <ul>
+          <li ng-repeat="item in student.accesslist">{{ item }}</li>
+     </ul>
+
      <div class="form-group">
           <label for="employer">Employer</label>
           <input class="form-control" type="text" id="employer" ng-model="employer.name" placeholder="Employer Name"/>
