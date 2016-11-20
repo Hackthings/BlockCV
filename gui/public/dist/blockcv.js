@@ -176,8 +176,8 @@ app.factory("BlockCVSvc", ['$http', function ($http) {
             self.config = config || {};
             console.log(self.config);
         });
-    var address = "http://localhost:7050/chaincode";
-    var ccaddress = "2cc2f10c7376e1a85c503c6d1a622c28e24b0b90c215de986d86dac71ad2eb0d4e96f705ec6eeba09ed4e729467d13e8e010aff70e700444760d289494b1a453";
+    var address = "http://165.165.131.77:7050/chaincode";
+    var ccaddress = "67dcd0eb2917f89d208b32a8be27ca23f8b018c1230a08ad94bf080807e07951b00dcc9a2bad40126c0c5c3886f59620096b41857b7479e4e53d0135452e2e28";
 
     self.grantAccess = function(args) {
         var requestArgs = {
