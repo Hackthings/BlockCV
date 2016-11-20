@@ -26,6 +26,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
             controller: 'HomeCtrl'
         })
     
+     .when('/studentsearchResults', {
+            templateUrl: 'app/partials/studentsearchResults.html',
+            controller: 'HomeCtrl'
+        })
     
     
         .otherwise({
