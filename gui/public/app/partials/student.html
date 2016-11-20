@@ -25,9 +25,9 @@
      <h3>Grant Access to Employer</h3>
      <div class="form-group">
           <label for="employer">Employer</label>
-          <input class="form-control" type="text" id="employer" ng-model="item.employer" placeholder="Employer Name"/>
+          <input class="form-control" type="text" id="employer" ng-model="employer.name" placeholder="Employer Name"/>
      </div>
 
-     <button type="button" class="btn btn-primary btn-lg  btn-outline-primary btn-block .btn-primarymine ">GRANT ACCESS</button>
+     <button type="button" class="btn btn-primary btn-lg  btn-outline-primary btn-block .btn-primarymine " ng-click="grantAccess(employer.name)">GRANT ACCESS</button>
 
 </div>

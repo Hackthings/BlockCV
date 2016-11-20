@@ -4,7 +4,7 @@ package main
 type Qualification struct {
 	Insititution string `json:"institution"`
 	Course       string `json:"course"`
-	Year         int    `json:"year"`
+	Year         string `json:"year"`
 	Grade        string `json:"grade"`
 }
 

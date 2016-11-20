@@ -8,7 +8,7 @@ app.factory("BlockCVSvc", ['$http', function ($http) {
             console.log(self.config);
         });
     var address = "http://localhost:7050/chaincode";
-    var ccaddress = "d12fcfdeaaacefa95887360eb6cda365675bb5d702d6633d245b428e3202727f237ac1e9a30e3e8ce846ec5f4d2aabd18a1070e884ff4054ca3044ce3ab705ec";
+    var ccaddress = "2cc2f10c7376e1a85c503c6d1a622c28e24b0b90c215de986d86dac71ad2eb0d4e96f705ec6eeba09ed4e729467d13e8e010aff70e700444760d289494b1a453";
 
     self.grantAccess = function(args) {
         var requestArgs = {
@@ -64,7 +64,7 @@ app.factory("BlockCVSvc", ['$http', function ($http) {
         var requestArgs = {
             method: "invoke",
             function: "add-qualification",
-            args: [args.studentId, args.qualification],
+            args: [args.studentId, JSON.stringify(args.qualification)],
             name: ccaddress
         };
         var request = generateRequest(requestArgs);

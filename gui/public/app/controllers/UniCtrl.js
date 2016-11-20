@@ -19,14 +19,16 @@ app.controller("UniCtrl", ['$scope', '$routeParams', 'BlockCVSvc', function ($sc
     };
 
     $scope.addQualification = function (qual) {
+        qual.institution = "University of Bedfordshire";
         var args = {
-            studentId: $scope.studentId,
+            studentId: qual.studentId,
             qualification: qual
         };
 
         BlockCVSvc.addQualification(args)
             .success(function (data) {
-                window.location.href = "#/uni";
+                console.log(JSON.stringify(data));
+                window.location.href = "#/student/" + qual.studentId;
             })
             .error(function (err) {
                 console.error(err);

@@ -18,6 +18,7 @@ app.controller("StudentCtrl", ['$scope', '$routeParams', 'BlockCVSvc', function 
     }
 
     load();
+    $scope.employer = {};
 
     $scope.grantAccess = function (employerName) {
         var args = {

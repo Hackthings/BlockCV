@@ -23,7 +23,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     
       .when('/add-qualification', {
             templateUrl: 'app/partials/addqualification.html',
-            controller: 'HomeCtrl'
+            controller: 'UniCtrl'
         })
     
      .when('/studentsearchResults', {

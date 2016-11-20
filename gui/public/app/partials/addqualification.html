@@ -1,1 +1,46 @@
--
+<div id="page-addQualification">
+     
+     <div class="container  topback">
+          <div class="jumbotron">
+               <h1 class="display-3">Add Qualification</h1>
+               <p class="lead">A blockchain implementation to validate accreditations for a university scenario
+               </p>
+           
+          </div>
+     </div>
+     
+     
+     <h2 class="display-3">Add Student Qualification</h2>
+
+    <div class="key-value">
+        <div class="key">Institution </div>
+        <div class="value">University of Bedfordshire</div>
+    </div>
+
+          <div class="form-group">
+               <label class="control-label" for="studentID">Student ID Number</label>
+               <input type="text" class="form-control" id="studentID" aria-describedby="Student ID" placeholder="Enter Student ID" ng-model="qual.studentId">
+               <small id="IDHelp" class="form-text text-muted">Enter the Student Student ID</small>
+          </div>
+
+
+          <div class="form-group">
+               <label class="control-label" for="courseName">Course Name</label>
+               <input type="text" class="form-control" id="courseName" aria-describedby="course Name" placeholder="Course Name" ng-model="qual.course">
+               <small id="IDHelp" class="form-text text-muted">Enter the Student Course Name</small>
+          </div>
+          <div class="form-group">
+               <label class="control-label" for="courseYear">Course Year </label>
+               <input type="text" class="form-control" id="courseYear" aria-describedby="Student ID" placeholder="Course Year" ng-model="qual.year">
+               <small id="IDHelp" class="form-text text-muted">Enter the Course Year</small>
+          </div>
+
+
+    <div class="form-group">
+        <label class="control-label" for="studentName">Grade</label>
+        <input type="text" class="form-control" id="studentName" aria-describedby="Studet Name" placeholder="Student Grade" ng-model="qual.grade">
+        <small id="IDHelp" class="form-text text-muted">Enter the Grade</small>
+    </div>
+           <button  class="btn btn-primary" ng-click="addQualification(qual)">Submit</button>
+          
+</div>
