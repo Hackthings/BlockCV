@@ -33,4 +33,15 @@ app.controller("UniCtrl", ['$scope', '$routeParams', 'BlockCVSvc', function ($sc
                 alert(err);
             });
     };
+
+    $scope.addStudent = function (student) {
+        BlockCVSvc.createStudent(student)
+            .success(function (data) {
+                console.log('RESPONSE', JSON.stringify(data));
+                $scope.success = true;
+            })
+            .error(function (error) {
+                alert(JSON.stringify(error));
+            });
+    };
 }]);

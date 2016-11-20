@@ -25,7 +25,7 @@ app.factory("BlockCVSvc", ['$http', function ($http) {
         var requestArgs = {
             method: "invoke",
             function: "create-student",
-            args: [key, student],
+            args: [key, JSON.stringify(student)],
             name: self.config.blockCVChaincodeAddress
         };
         var request = generateRequest(requestArgs);
@@ -100,13 +100,19 @@ app.factory("BlockCVSvc", ['$http', function ($http) {
 
         request.params.ctorMsg.args = args.args || [];
 
+
+
         if (args.function) {
-            request.params.ctorMsg.args.unshift(args.function || 'dummy');
+            //request.params.ctorMsg.args.unshift(args.function || 'dummy');
+            request.params.ctorMsg.function = args.function;
         }
 
         var date = new Date();
 
         request.id = date.getTime();
+
+
+        console.log(JSON.stringify(request, null, 4));
 
         return request;
     }

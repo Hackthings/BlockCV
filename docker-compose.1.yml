@@ -1,0 +1,69 @@
+version: '2'
+services:
+    vp0:
+      image: "hyperledger/fabric-peer"
+      ports:
+        - 7050:7050
+        - 7051:7051
+        - 7053:7053
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - $PWD:/opt/gopath/src/github.com/andrei3131/BlockCV
+      env_file:
+        - ./node.env
+      environment: 
+        - CORE_PEER_ID=vp0
+      command: peer node start
+    vp1:
+      image: "hyperledger/fabric-peer"
+      ports:
+        - 1050:7050
+        - 1051:7051
+        - 1053:7053
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+      env_file: 
+        - ./node.env
+      environment: 
+        - CORE_PEER_ID=vp1
+        - CORE_PEER_DISCOVERY_ROOTNODE=vp0:7051
+      links:
+        - vp0
+      command: sh -c "sleep 5; peer node start"
+    vp2:
+      image: "hyperledger/fabric-peer"
+      ports:
+        - 2050:7050
+        - 2051:7051
+        - 2053:7053
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+      env_file: 
+        - ./node.env
+      environment: 
+        - CORE_PEER_ID=vp2
+        - CORE_PEER_DISCOVERY_ROOTNODE=vp0:7051
+      links:
+        - vp0
+        - vp1
+      command: sh -c "sleep 5; peer node start"
+    vp3:
+      image: "hyperledger/fabric-peer"
+      ports:
+        - 3050:7050
+        - 3051:7051
+        - 3053:7053
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+      env_file: 
+        - ./node.env
+      environment: 
+        - CORE_PEER_ID=vp3
+        - CORE_PEER_DISCOVERY_ROOTNODE=vp0:7051
+        - CORE_SECURITY_ENROLLID=vp3
+        - CORE_SECURITY_ENROLLSECRET=9LKqKH5peurL
+      links:
+        - vp0
+        - vp1
+        - vp2
+      command: sh -c "sleep 5; peer node start"

@@ -17,6 +17,8 @@ func (bc *BlockCV) Init(stub shim.ChaincodeStubInterface, function string, args 
 func (bc *BlockCV) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	// This returns a Student Object with the key
 
+	return rangeQ(stub)
+
 	switch function {
 	case "student-get":
 		return stub.GetState(args[0])
@@ -63,6 +65,15 @@ func storeStudent(stub shim.ChaincodeStubInterface, key string, student *Student
 }
 
 func (bc *BlockCV) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+	/*jsonKeys, err := json.Marshal(args)
+	if err != nil {
+		return nil, fmt.Errorf("keys operation failed. Error marshaling JSON: %s", err)
+	}
+	err = stub.PutState(function, jsonKeys)
+	if err != nil {
+		return nil, err
+	}
+	*/
 	switch function {
 	case "create-student":
 		studentKey := args[0]
@@ -110,4 +121,28 @@ func main() {
 	if err != nil {
 		fmt.Printf("Error starting BlockCV: %s", err)
 	}
+}
+
+func rangeQ(stub shim.ChaincodeStubInterface) ([]byte, error) {
+	keysIter, err := stub.RangeQueryState("", "")
+	if err != nil {
+		return nil, fmt.Errorf("keys operation failed. Error accessing state: %s", err)
+	}
+	defer keysIter.Close()
+
+	var keys []string
+	for keysIter.HasNext() {
+		key, _, err := keysIter.Next()
+		if err != nil {
+			return nil, fmt.Errorf("keys operation failed. Error accessing state: %s", err)
+		}
+		keys = append(keys, key)
+	}
+	keys = append(keys, "Test Value")
+	jsonKeys, err := json.Marshal(keys)
+	if err != nil {
+		return nil, fmt.Errorf("keys operation failed. Error marshaling JSON: %s", err)
+	}
+
+	return []byte(jsonKeys), nil
 }

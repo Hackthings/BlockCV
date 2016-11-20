@@ -10,43 +10,25 @@
      </div>
      
      <h2>Bedfordshire Uni</h2>
-     
-     
-     
+
     <form method="post">
           <div class="form-group">
-               <label class="control-label" for="StudentName">Enter Student Name </label>
-               <input type="text" class="form-control" id="InputName" aria-describedby="Name" placeholder="EnterStudentName">
+               <label class="control-label" for="studentName">Enter Student Name </label>
+               <input type="text" class="form-control" id="studentName" aria-describedby="Name" placeholder="Enter Student Name" ng-model="item.name">
                <small id="nameHelp" class="form-text text-muted">Enter the Student Name</small>
          </div>
 
-
-
-    <!-- Form code begins -->
+   <!-- Form code begins -->
    
       <div class="form-group"> <!-- Date input -->
         <label class="control-label" for="date">Date</label>
-        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
+        <input class="form-control" id="date" name="date" placeholder="DD/MM/YYY" type="text" ng-model="item.dateofbirth"/>
       </div>
       <div class="form-group"> <!-- Submit button -->
-        
-        
-   
- 
 
-
-        
-       <button type="button" class="btn btn-primary btn-lg  btn-outline-primary btn-block ">Add</button>
+       <button type="button" class="btn btn-primary btn-lg  btn-outline-primary btn-block" ng-click="addStudent(item)">Add</button>
       </div>
 
      <!-- Form code ends --> 
-
-    
-
-          
-          
-          
-         
-
-     </form> 
+     </form>
 </div>

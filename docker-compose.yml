@@ -1,0 +1,17 @@
+version: '2'
+services:
+    vp0:
+      image: "hyperledger/fabric-peer"
+      ports:
+        - 7050:7050
+        - 7051:7051
+        - 7053:7053
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - $PWD:/opt/gopath/src/github.com/andrei3131/BlockCV
+      env_file:
+        - ./node.env
+      environment: 
+        - CORE_PEER_ID=vp0
+      command: peer node start
+   
