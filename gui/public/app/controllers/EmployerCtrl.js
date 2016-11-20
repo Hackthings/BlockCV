@@ -5,13 +5,22 @@ app.controller("EmployerCtrl", ['$scope', 'BlockCVSvc', function ($scope, BlockC
             studentId: id,
             employerName: "IBM CORP"
         };
+        $scope.notAuthorised = false;
         $scope.student = null;
+        $scope.notFound = false;
         BlockCVSvc.getStudentEmployer(args)
             .success(function (data) {
                 console.log(JSON.stringify(data));
                 if (!data.result) {
-                    alert(JSON.stringify(data));
+                   // alert(JSON.stringify(data));
+                    $scope.notFound = true;
+                    return;
                 }
+                if (data.result.message == "Not Authorised") {
+                    $scope.notAuthorised = true;
+                    return;
+                }
+
                 $scope.student = JSON.parse(data.result.message);
             })
             .error(function (err) {

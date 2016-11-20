@@ -2,13 +2,15 @@
    
      <div class="container  topback">
           <div class="jumbotron">
-               <h1 class="display-3">BLOCK CV </h1>
-               <p class="lead">A blockchain implementation to validate accreditations for a university scenario
+               <h1 class="display-3">BLOCK CV</h1>
+               <h2>Welcome IBM Corp</h2>
+               <p class="lead">
+                    Search for a new employees University Results.
+
                </p>
            
           </div>
      </div>
-     
 
      <div id="imaginary_container">
           <div class="input-group stylish-input-group">
@@ -25,6 +27,13 @@
      <br>
 
      <div>
+
+          <div class="alert alert-danger" ng-show="notAuthorised == true">
+               <strong>You Don't Have Access!!!!</strong>
+          </div>
+          <div class="alert alert-warning" ng-show="notFound == true">
+               <strong>That user was not found.</strong>
+          </div>
 
           <div class="panel panel-default" ng-show="student != null">
                <div class="panel-heading">
