@@ -1,70 +1,94 @@
 <!DOCTYPE html>
 <html ng-app="blockcv">
-<head>
-  <title>Public Uber</title>
-     
-     <!--  jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
-<!--<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+<head>
+     <title>Public Uber</title>
+
+     <!--  jQuery -->
+     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+     <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+     <!--<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
 
 <!-- Bootstrap Date-Picker Plugin -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-     
-     
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-  <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-  <link href="stylesheets/app.css" rel='stylesheet' type='text/css'>
-     
+     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+
+     <script type="text/javascript" src="stylesheets/bootstrap-datepicker.js"></script>
+
+
+     <!-- Include Required Prerequisites -->
+     <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+     <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+
+     <!-- Include Date Range Picker -->
+     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
+
+     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+     <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+     <link href="stylesheets/app.css" rel='stylesheet' type='text/css'>
+     <link href="stylesheets/datepicker.css" rel='stylesheet' type='text/css'>
      <!-- Google Font -->
      <link href="https://fonts.googleapis.com/css?family=Raleway:400,900" rel="stylesheet">
      <link href="https://fonts.googleapis.com/css?family=Poppins:400,700" rel="stylesheet">
 </head>
+
 <body>
-     <div class = "container">
-          
- 
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+     <div class="container">
+
+
+          <nav class="navbar navbar-default">
+               <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">BlockCV</a>
-        </div>
+                         <a class="navbar-brand" href=""></a>
+                    </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="#/home">Home</a></li>
-                <li><a href="#/uni">Uni</a></li>
-                <li><a href="#/student">Student</a></li>
-                <li><a href="#/employer">Employer</a></li>
-                 <li><a href="#/add-qualification">AddQualification</a></li>
-                 
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                         <ul class="nav navbar-nav">
+                              <li><a href="#/home">Home</a></li>
+                              <li><a href="#/uni">Uni</a></li>
+                              <li><a href="#/student">Student</a></li>
+                              <li><a href="#/employer">Employer</a></li>
+                              <li><a href="#/add-qualification">AddQualification</a></li>
 
-  <div class="container">
-    <div ng-view></div>
-      
-       
-  </div>
+                         </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+               </div>
+               <!-- /.container-fluid -->
+          </nav>
+     </div>
+          <div class="container">
+               <div ng-view></div>
 
-     
-  <script src="lib/jquery/dist/jquery.min.js"></script>
-  <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="lib/angular/angular.min.js"></script>
-  <script src="lib/angular-route/angular-route.min.js"></script>
-  <script src="dist/blockcv.min.js"></script>
-              </div>
+               <footer class="footer">
+                    <div class="container">
+                         <span class="text-muted">Place sticky footer content here.</span>
+                    </div>
+               </footer>
+          </div>
+
+          <script src="lib/jquery/dist/jquery.min.js"></script>
+          <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+          <script src="lib/angular/angular.min.js"></script>
+          <script src="lib/angular-route/angular-route.min.js"></script>
+          <script src="dist/blockcv.min.js"></script>
+
+
+
+
+     </div>
 </body>
+
 </html>
